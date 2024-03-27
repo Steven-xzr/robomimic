@@ -1,18 +1,18 @@
 #!/bin/bash
 
-BASE_DATASET_DIR="../../datasets"
+BASE_DATASET_DIR="~/DemoGen/robomimic/datasets"
 echo "Using base dataset directory: $BASE_DATASET_DIR"
-
+OUTPUT_DIR="~/DemoGen/data/recorded_demo"
 ###################### img+depth ######################
 
 # lift - ph
 python dataset_states_to_obs.py --dataset $BASE_DATASET_DIR/lift/ph/demo_v141.hdf5 \
---output_name img_depth_200_84x84_v141.hdf5 --done_mode 2 \
---camera_names agentview --camera_height 84 --camera_width 84 --depth
+--output_path $OUTPUT_DIR/img_depth_200_84x84_v141.hdf5 \
+--done_mode 2 --camera_names agentview --camera_height 84 --camera_width 84 --depth
 
 python dataset_states_to_obs.py --dataset $BASE_DATASET_DIR/lift/ph/demo_v141.hdf5 \
---output_name img_depth_200_256x256_v141.hdf5 --done_mode 2 \
---camera_names agentview --camera_height 256 --camera_width 256 --depth
+--output_name $OUTPUT_DIR/img_depth_200_84x84_v141.hdf5 \
+--done_mode 2 --camera_names agentview --camera_height 256 --camera_width 256 --depth
 
 # # can - ph
 # python dataset_states_to_obs.py --dataset $BASE_DATASET_DIR/can/ph/demo_v141.hdf5 \

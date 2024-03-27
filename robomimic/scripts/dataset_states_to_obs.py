@@ -239,7 +239,8 @@ def dataset_states_to_obs(args):
         demos = demos[:args.n]
 
     # output file in same directory as input file
-    output_path = os.path.join(os.path.dirname(args.dataset), args.output_name)
+    # output_path = os.path.join(os.path.dirname(args.dataset), args.output_name)
+    output_path = args.output_path
     f_out = h5py.File(output_path, "w")
     data_grp = f_out.create_group("data")
     print("input file: {}".format(args.dataset))
@@ -329,10 +330,10 @@ if __name__ == "__main__":
     )
     # name of hdf5 to write - it will be in the same directory as @dataset
     parser.add_argument(
-        "--output_name",
+        "--output_path",
         type=str,
         required=True,
-        help="name of output hdf5 dataset",
+        help="output path of output hdf5 dataset",
     )
 
     # specify number of demos to process - useful for debugging conversion with a handful

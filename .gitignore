@@ -1,5 +1,6 @@
 /exp_results/
-
+/demo/
+/robomimic/demo/
 
 # pip distribution folder
 dist/

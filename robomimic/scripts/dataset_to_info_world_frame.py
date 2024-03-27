@@ -245,10 +245,9 @@ def dataset_states_to_obs(args):
 
     # output file in same directory as input file
     exp_path = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        "../../demo",
+        os.getcwd(),
+        "../../../data/recorded_demo",
         str(args.exp_name),
-        str(args.task),
     )
     os.makedirs(exp_path, exist_ok=True)
 

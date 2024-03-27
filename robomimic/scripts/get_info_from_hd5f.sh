@@ -13,7 +13,7 @@ echo "Using base dataset directory: $BASE_DATASET_DIR"
 
 ###########  world frame, rgbd in png/npy, without seg  ############
 
-python dataset_to_info_world_frame.py --dataset $BASE_DATASET_DIR/lift/ph/demo_v141.hdf5 \
+python dataset_to_info_world_frame.py --dataset $BASE_DATASET_DIR/lift/ph/img_depth.hdf5 \
 --done_mode 2 \
 --camera_names agentview --camera_height 84 --camera_width 84 \
 --exp_name test --task lift \
