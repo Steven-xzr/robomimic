@@ -244,11 +244,7 @@ def dataset_states_to_obs(args):
     )
 
     # output file in same directory as input file
-    exp_path = os.path.join(
-        os.getcwd(),
-        "../../../data/recorded_demo",
-        str(args.exp_name),
-    )
+    exp_path = args.output_path
     os.makedirs(exp_path, exist_ok=True)
 
     # get env info
@@ -262,7 +258,9 @@ def dataset_states_to_obs(args):
 
     # list of all demonstration episodes (sorted in increasing number order)
     hdf5_file = h5py.File(args.dataset, "r")
-    demos = list(hdf5_file["data"].keys())
+    # demos = list(hdf5_file["data"].keys())
+    demos = [demo.decode('utf-8') for demo in hdf5_file["mask/picked_train"][()]]
+    print("picked demos: ", demos)
     inds = np.argsort([int(elem[5:]) for elem in demos])
     demos = [demos[i] for i in inds]
 
@@ -411,7 +409,7 @@ if __name__ == "__main__":
         "--dataset",
         type=str,
         required=True,
-        help="path to input hdf5 dataset",
+        help="path to input hdf5 dataset. There must be a key 'picked_train' in the mask",
     )
 
     parser.add_argument(
@@ -422,10 +420,10 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "--exp_name",
+        "--output_path",
         type=str,
         required=True,
-        help="name of output dir",
+        help="name of output dir, full path",
     )
 
     # flag for reward shaping

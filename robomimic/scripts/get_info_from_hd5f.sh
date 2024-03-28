@@ -19,6 +19,12 @@ python dataset_to_info_world_frame.py --dataset $BASE_DATASET_DIR/lift/ph/img_de
 --exp_name test --task lift \
 
 
+python robomimic/robomimic/scripts/dataset_to_info_world_frame.py \
+--dataset ~/DemoGen/data/recorded_demo/lift/img_depth_200_256x256_v141.hdf5 \
+--done_mode 2 \
+--camera_names agentview --camera_height 256 --camera_width 256 \
+--output_path ~/DemoGen/data/recorded_demo/lift_256x256 --task lift \
+
 ###########   world frame, rgbd in png/npy  ############
 
 # python dataset_to_low_dim_info_world.py --dataset $BASE_DATASET_DIR/"$2"/ph/demo_v141.hdf5 \
