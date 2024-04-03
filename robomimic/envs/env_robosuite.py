@@ -172,6 +172,15 @@ class EnvRobosuite(EB.EnvBase):
             # only return obs if we've done a forward call - otherwise the observations will be garbage
             return self.get_observation()
         return None
+    
+    def reset_to_trans(self, state, trans_range=0.03, seed=0):
+        if "states" in state:
+            cube_body_id = self.env.sim.model.body_name2id(self.env.cube.root_body)
+            self.env.sim.set_state_from_flattened_trans(state["states"], trans_range, cube_body_id, seed)
+            self.env.sim.forward()
+        else:
+            self.reset()
+        return self.get_observation()
 
     def render(self, mode="human", height=None, width=None, camera_name="agentview"):
         """

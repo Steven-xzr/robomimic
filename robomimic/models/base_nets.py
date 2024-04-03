@@ -496,6 +496,7 @@ class ResNet18Conv(ConvBase):
         input_channel=3,
         pretrained=False,
         input_coord_conv=False,
+        freeze=False,
     ):
         """
         Args:
@@ -518,6 +519,12 @@ class ResNet18Conv(ConvBase):
         self._input_coord_conv = input_coord_conv
         self._input_channel = input_channel
         self.nets = torch.nn.Sequential(*(list(net.children())[:-2]))
+
+        if freeze:
+            self._freeze = True
+            for param in self.nets.parameters():
+                param.requires_grad = False
+            self.nets.eval()
 
     def output_shape(self, input_shape):
         """
